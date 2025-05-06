@@ -14484,9 +14484,6 @@ class GenericGraph(GenericGraph_pyx):
         pos3d = self.get_pos(dim=3)
         if pos3d is not None:
             G._pos3d = {v: pos3d[v] for v in G if v in pos3d}
-        embedding = self.get_embedding()
-        if embedding is not None:
-            G._embedding = {u: [v for v in embedding[u] if u in G] for u in G}
 
         if immutable is None:
             immutable = self.is_immutable()
@@ -24179,9 +24176,6 @@ class GenericGraph(GenericGraph_pyx):
             for t in perm.values():
                 hash(t)
 
-        embedding = self.get_embedding()
-        if embedding is not None:
-            self._embedding = {perm[u]: [perm[v] for v in neighbors] for u, neighbors in embedding.items()}
         pos = self.get_pos()
         if pos is not None:
             self._pos = {perm[u]: x for u, x in pos.items()}
